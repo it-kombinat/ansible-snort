@@ -1,0 +1,10 @@
+[Unit]
+Description=snort-service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+ExecStart=/sbin/snort -d -h {{ ansible_default_ipv4.address }} -A console -A fast -c /etc/snort/snort.conf
+
+[Install]
+WantedBy=multi-user.target
