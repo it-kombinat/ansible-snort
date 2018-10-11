@@ -1,0 +1,13 @@
+{{ ansible_managed|comment }}
+# snort alert
+$ModLoad imfile
+$InputFilePollInterval 0
+$InputFileName /var/log/snort/alert
+$InputFileTag snort
+$InputFileFacility local6
+$InputFileStateFile stat-snort
+$InputFileSeverity info
+$InputRunFileMonitor
+$InputFilePollInterval 1
+$InputFileTag snort
+*.* @@{{ snort_forwarder | join(" ") }}:{{ snort_forwarder_port | default(1514) }}

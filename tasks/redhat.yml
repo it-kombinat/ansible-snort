@@ -55,5 +55,5 @@
 - name: redhat | ensuring snort is enabled
   service:
     name: snortd
-    enabled: true
+    enabled: false
   become: true

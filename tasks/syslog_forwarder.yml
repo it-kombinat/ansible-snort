@@ -1,0 +1,16 @@
+---
+- name: config_snort | configuring rsyslog software for forwarding
+  template:
+    src: etc/rsyslog.conf.j2
+    dest: /etc/rsyslog.conf
+  notify: restart rsyslog
+
+- name: config_snort | configuring rsyslog forwarding
+  template:
+    src: etc/rsyslog.d/snort.conf.j2
+    dest: /etc/rsyslog.d/snort.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rsyslog
+  when: ansible_os_family == "RedHat"
